@@ -6,9 +6,3 @@ export async function searchMovies(query) {
 
   return data.Search;
 }
-
-async function testSearch() {
-  const result = await searchMovies("ice age");
-  console.log(result);
-}
-testSearch();
