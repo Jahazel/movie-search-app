@@ -25,10 +25,12 @@ searchBtn.addEventListener("click", async () => {
 });
 
 movieGrid.addEventListener("click", (e) => {
-  let movieId = e.target.closest(".movie-card").id;
-  let movie = currentMovies.find(({ imdbID }) => imdbID === movieId);
+  if (e.target.classList.contains("fav-btn")) {
+    let movieId = e.target.closest(".movie-card").id;
+    let movie = currentMovies.find(({ imdbID }) => imdbID === movieId);
 
-  SaveFavorite(movie);
+    SaveFavorite(movie);
+  }
 });
 
 myFavoritesBtn.addEventListener("click", () => {
