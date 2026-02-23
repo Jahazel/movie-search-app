@@ -39,3 +39,5 @@ myFavoritesBtn.addEventListener("click", () => {
 
   renderFavorites(getFavorites());
 });
+
+// localStorage.clear();

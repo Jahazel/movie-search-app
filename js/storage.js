@@ -2,8 +2,10 @@ export function SaveFavorite(movie) {
   const stored = localStorage.getItem("favorites");
   const favoritesStorage = stored ? JSON.parse(stored) : [];
 
-  favoritesStorage.push(movie);
-  localStorage.setItem("favorites", JSON.stringify(favoritesStorage));
+  if (!favoritesStorage.some(({ imdbID }) => imdbID === movie.imdbID)) {
+    favoritesStorage.push(movie);
+    localStorage.setItem("favorites", JSON.stringify(favoritesStorage));
+  }
 }
 
 export function getFavorites() {
