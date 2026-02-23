@@ -75,8 +75,8 @@ body {
   padding: 1rem;
 }
 
-#search-view-h2-el,
-#favorites-h2-el {
+#search-view-header,
+#my-favorites-header {
   margin-bottom: 16px;
   font-size: 1rem;
   font-weight: 600;
@@ -84,15 +84,15 @@ body {
   display: none;
 }
 
-/* MOVIE GRID */
-#movie-grid {
+#movie-grid,
+#my-favorites-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 16px;
 }
 
-/* MOVIE CARD */
-.movie-card {
+.movie-card,
+.favorite-movie-card {
   background: #161b22;
   border: 1px solid #30363d;
   border-radius: 6px;
@@ -102,38 +102,44 @@ body {
   transition: border-color 0.15s;
 }
 
-.movie-card:hover {
+.movie-card:hover,
+.favorite-movie-card:hover {
   border-color: #8b949e;
 }
 
-.movie-card img {
+.movie-card img,
+.favorite-movie-card img {
   width: 100%;
   height: 240px;
   object-fit: cover;
   display: block;
 }
 
-.movie-card .info-container {
+.movie-card .info-container,
+.favorite-movie-card .info-container {
   display: flex;
   flex-direction: column;
   flex: 1;
   padding: 8px;
 }
 
-.movie-card .title {
+.movie-card .title,
+.favorite-movie-card .title {
   font-weight: 600;
   font-size: 0.85rem;
   color: #e6edf3;
   margin-bottom: 4px;
 }
 
-.movie-card .release-year {
+.movie-card .release-year,
+.favorite-movie-card .release-year {
   font-size: 0.8rem;
   color: #8b949e;
   margin-bottom: 8px;
 }
 
-.movie-card button {
+.movie-card button,
+.favorite-movie-card button {
   margin-top: auto;
   padding: 6px;
   border: 1px solid #388bfd;
@@ -148,7 +154,8 @@ body {
     color 0.15s;
 }
 
-.movie-card button:hover {
+.movie-card button:hover,
+.favorite-movie-card button.hover {
   background: #388bfd;
   color: #fff;
 }
