@@ -1,5 +1,11 @@
 export function renderMovies(movies) {
   const movieGrid = document.getElementById("movie-grid");
+  const searchViewContainer = document.getElementById("search-view-container");
+  const errorMessageElement = document.getElementById("error-message-element");
+
+  if (searchViewContainer.contains(errorMessageElement)) {
+    searchViewContainer.removeChild(errorMessageElement);
+  }
 
   let movieCards = movies
     .map(({ Poster, Title, Year, imdbID }) => {
@@ -36,4 +42,18 @@ export function renderFavorites(favoriteMovies) {
     .join(" ");
 
   myFavoritesGrid.innerHTML = favoriteMovieCards;
+}
+
+export function renderError(errorMessage) {
+  const searchViewContainer = document.getElementById("search-view-container");
+  const errorMessageElement = document.createElement("h1");
+  errorMessageElement.setAttribute("id", "error-message-element");
+  const existing = document.getElementById("error-message-element");
+
+  if (existing) {
+    searchViewContainer.removeChild(existing);
+  }
+
+  errorMessageElement.textContent = errorMessage;
+  searchViewContainer.appendChild(errorMessageElement);
 }

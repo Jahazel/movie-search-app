@@ -4,5 +4,9 @@ export async function searchMovies(query) {
   );
   const data = await response.json();
 
+  if (data.Response === "False") {
+    throw new Error(data.Error);
+  }
+
   return data.Search;
 }

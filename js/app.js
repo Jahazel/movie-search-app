@@ -3,6 +3,7 @@ import { renderMovies } from "./ui.js";
 import { SaveFavorite } from "./storage.js";
 import { getFavorites } from "./storage.js";
 import { renderFavorites } from "./ui.js";
+import { renderError } from "./ui.js";
 
 const searchBtn = document.getElementById("search-btn");
 const searchInput = document.getElementById("search-input");
@@ -15,15 +16,21 @@ const myFavoritesContainer = document.getElementById("my-favorites-container");
 let currentMovies = [];
 
 searchBtn.addEventListener("click", async () => {
-  let inputValue = searchInput.value;
-  let moviesArray = await searchMovies(inputValue);
-  currentMovies = moviesArray;
+  try {
+    const inputValue = searchInput.value;
+    const movies = await searchMovies(inputValue);
 
-  renderMovies(moviesArray);
-  searchInput.value = "";
-  searchViewContainer.style.display = "block";
-  searchViewHeader.style.display = "block";
-  myFavoritesContainer.style.display = "none";
+    currentMovies = movies;
+    renderMovies(movies);
+    searchInput.value = "";
+    searchViewContainer.style.display = "block";
+    searchViewHeader.style.display = "block";
+    myFavoritesContainer.style.display = "none";
+  } catch (error) {
+    searchViewHeader.style.display = "none";
+    movieGrid.innerHTML = "";
+    renderError(error.message);
+  }
 });
 
 movieGrid.addEventListener("click", (e) => {
