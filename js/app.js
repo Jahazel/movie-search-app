@@ -11,6 +11,7 @@ const searchViewHeader = document.getElementById("search-view-header");
 const myFavoritesHeader = document.getElementById("my-favorites-header");
 const movieGrid = document.getElementById("movie-grid");
 const myFavoritesBtn = document.getElementById("my-favorites-btn");
+const myFavoritesContainer = document.getElementById("my-favorites-container");
 let currentMovies = [];
 
 searchBtn.addEventListener("click", async () => {
@@ -22,6 +23,7 @@ searchBtn.addEventListener("click", async () => {
   searchInput.value = "";
   searchViewContainer.style.display = "block";
   searchViewHeader.style.display = "block";
+  myFavoritesContainer.style.display = "none";
 });
 
 movieGrid.addEventListener("click", (e) => {
