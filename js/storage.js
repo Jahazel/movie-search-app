@@ -1,4 +1,4 @@
-export function SaveFavorite(movie) {
+export function saveFavorite(movie) {
   const stored = localStorage.getItem("favorites");
   const favoritesStorage = stored ? JSON.parse(stored) : [];
 
