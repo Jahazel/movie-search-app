@@ -3,6 +3,7 @@ import { saveFavorite, getFavorites } from "./storage.js";
 import { renderMovies, renderFavorites, renderError } from "./ui.js";
 
 const searchBtn = document.getElementById("search-btn");
+const logo = document.getElementById("logo");
 const searchInput = document.getElementById("search-input");
 const searchViewContainer = document.getElementById("search-view-container");
 const searchViewHeader = document.getElementById("search-view-header");
@@ -10,13 +11,16 @@ const myFavoritesHeader = document.getElementById("my-favorites-header");
 const movieGrid = document.getElementById("movie-grid");
 const myFavoritesBtn = document.getElementById("my-favorites-btn");
 const myFavoritesContainer = document.getElementById("my-favorites-container");
+const welcomeMessage = document.getElementById("welcome-message");
 let currentMovies = [];
 
 searchBtn.addEventListener("click", async () => {
   const inputValue = searchInput.value;
+  welcomeMessage.style.display = "none";
 
   if (!inputValue) {
     searchViewContainer.style.display = "block";
+    searchViewHeader.style.display = "none";
     movieGrid.style.display = "none";
     myFavoritesContainer.style.display = "none";
     renderError("Search field cannot be empty.");
@@ -52,6 +56,7 @@ movieGrid.addEventListener("click", (e) => {
 });
 
 myFavoritesBtn.addEventListener("click", () => {
+  welcomeMessage.style.display = "none";
   searchViewContainer.style.display = "none";
   searchViewHeader.style.display = "none";
   myFavoritesContainer.style.display = "block";
@@ -60,4 +65,9 @@ myFavoritesBtn.addEventListener("click", () => {
   renderFavorites(getFavorites());
 });
 
+logo.addEventListener("click", () => {
+  welcomeMessage.style.display = "block";
+  searchViewContainer.style.display = "none";
+  myFavoritesContainer.style.display = "none";
+});
 // localStorage.clear();
