@@ -27,21 +27,24 @@ export function renderMovies(movies) {
 export function renderFavorites(favoriteMovies) {
   const myFavoritesGrid = document.getElementById("my-favorites-grid");
 
-  let favoriteMovieCards = favoriteMovies
-    .map(({ Poster, Title, Year, imdbID }) => {
-      return `
-      <div id="${imdbID}" class="favorite-movie-card">
-        <img src="${Poster !== "N/A" ? Poster : "https://placehold.co/300x445?text=No+Poster"}" alt="movie poster" onerror="this.src='https://placehold.co/300x445?text=No+Poster'">
-        <div class="info-container">
-            <p class="title">${Title}</p>
-            <p class="release-year">${Year}</p>
-            <button class="delete-btn">Delete</button>
-        </div>  
-      </div>`;
-    })
-    .join(" ");
-
-  myFavoritesGrid.innerHTML = favoriteMovieCards;
+  if (!favoriteMovies || favoriteMovies.length === 0) {
+    myFavoritesGrid.innerHTML = `<p id="empty-favorites-message">No favorites saved yet. Start saving movies! 🎬</p>`;
+  } else {
+    let favoriteMovieCards = favoriteMovies
+      .map(({ Poster, Title, Year, imdbID }) => {
+        return `
+          <div id="${imdbID}" class="favorite-movie-card">
+            <img src="${Poster !== "N/A" ? Poster : "https://placehold.co/300x445?text=No+Poster"}" alt="movie poster" onerror="this.src='https://placehold.co/300x445?text=No+Poster'">
+            <div class="info-container">
+                <p class="title">${Title}</p>
+                <p class="release-year">${Year}</p>
+                <button class="delete-btn">Delete</button>
+            </div>
+          </div>`;
+      })
+      .join(" ");
+    myFavoritesGrid.innerHTML = favoriteMovieCards;
+  }
 }
 
 export function renderError(errorMessage) {

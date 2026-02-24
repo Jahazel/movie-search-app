@@ -1,5 +1,5 @@
 import { searchMovies } from "./api.js";
-import { saveFavorite, getFavorites } from "./storage.js";
+import { saveFavorite, getFavorites, removeFavorite } from "./storage.js";
 import { renderMovies, renderFavorites, renderError } from "./ui.js";
 
 const searchBtn = document.getElementById("search-btn");
@@ -12,6 +12,8 @@ const movieGrid = document.getElementById("movie-grid");
 const myFavoritesBtn = document.getElementById("my-favorites-btn");
 const myFavoritesContainer = document.getElementById("my-favorites-container");
 const welcomeMessage = document.getElementById("welcome-message");
+const myFavoritesGrid = document.getElementById("my-favorites-grid");
+// const deleteBtn = document.getElementById("delete-btn");
 let currentMovies = [];
 
 searchBtn.addEventListener("click", async () => {
@@ -56,11 +58,18 @@ movieGrid.addEventListener("click", (e) => {
 });
 
 myFavoritesBtn.addEventListener("click", () => {
+  let favoriteMovies = getFavorites();
+
   welcomeMessage.style.display = "none";
   searchViewContainer.style.display = "none";
   searchViewHeader.style.display = "none";
   myFavoritesContainer.style.display = "block";
-  myFavoritesHeader.style.display = "block";
+
+  if (!favoriteMovies || favoriteMovies.length === 0) {
+    myFavoritesHeader.style.display = "none";
+  } else {
+    myFavoritesHeader.style.display = "block";
+  }
 
   renderFavorites(getFavorites());
 });
@@ -70,4 +79,19 @@ logo.addEventListener("click", () => {
   searchViewContainer.style.display = "none";
   myFavoritesContainer.style.display = "none";
 });
-// localStorage.clear();
+
+myFavoritesGrid.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete-btn")) {
+    let movieId = e.target.closest(".favorite-movie-card").id;
+    let favoriteMovies = getFavorites();
+    let movie = favoriteMovies.find(({ imdbID }) => imdbID === movieId);
+
+    removeFavorite(movie);
+    let updatedFavorites = getFavorites();
+    renderFavorites(updatedFavorites);
+
+    if (!updatedFavorites || updatedFavorites.length === 0) {
+      myFavoritesHeader.style.display = "none";
+    }
+  }
+});

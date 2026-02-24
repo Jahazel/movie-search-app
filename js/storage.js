@@ -13,3 +13,12 @@ export function getFavorites() {
 
   return favorites;
 }
+
+export function removeFavorite(movie) {
+  let favorites = JSON.parse(localStorage.getItem("favorites"));
+  let filteredFavorites = favorites.filter(
+    ({ imdbID }) => imdbID !== movie.imdbID,
+  );
+
+  localStorage.setItem("favorites", JSON.stringify(filteredFavorites));
+}
